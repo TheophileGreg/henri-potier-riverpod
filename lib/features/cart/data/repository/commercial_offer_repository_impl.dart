@@ -8,7 +8,8 @@ class CommercialOfferRepositoryImpl implements CommercialOfferRepository {
   CommercialOfferRepositoryImpl({required this.commercialOfferApi});
 
   @override
-  Future<List<CommercialOffer>> getCommercialOffers(List<String> isbns) async {
-    return await commercialOfferApi.getCommercialOffers(isbns);
+  Future<List<CommercialOffer>> getCommercialOffers(String isbns) async {
+    final response = await commercialOfferApi.getCommercialOffers(isbns);
+    return response.offers.map((offerModel) => offerModel.toDomain()).toList();
   }
 }

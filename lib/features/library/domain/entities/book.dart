@@ -7,7 +7,7 @@ class Book extends Equatable {
   final String cover;
   final List<String> synopsis;
 
-  Book({
+  const Book({
     required this.isbn,
     required this.title,
     required this.price,

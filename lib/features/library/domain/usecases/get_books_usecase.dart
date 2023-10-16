@@ -6,7 +6,7 @@ class GetBooksUseCase {
 
   GetBooksUseCase(this._repository);
 
-  Future<List<Book>> execute() async {
+  Future<List<Book>> call() async {
     return await _repository.getBooks();
   }
 }

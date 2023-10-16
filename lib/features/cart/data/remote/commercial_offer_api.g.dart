@@ -21,14 +21,13 @@ class _CommercialOfferApi implements CommercialOfferApi {
   String? baseUrl;
 
   @override
-  Future<List<CommercialOfferModel>> getCommercialOffers(
-      List<String> isbns) async {
+  Future<CommercialOffersResponse> getCommercialOffers(String isbns) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<CommercialOfferModel>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<CommercialOffersResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -44,10 +43,7 @@ class _CommercialOfferApi implements CommercialOfferApi {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
-        .map((dynamic i) =>
-            CommercialOfferModel.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = CommercialOffersResponse.fromJson(_result.data!);
     return value;
   }
 

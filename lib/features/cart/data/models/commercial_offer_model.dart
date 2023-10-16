@@ -1,9 +1,9 @@
 import 'package:henri_potier_riverpod/features/cart/domain/entities/commercial_offer.dart';
 
 class CommercialOfferModel extends CommercialOffer {
-  final String type;
-  final double value;
-  final double? sliceValue;
+  final OfferType type;
+  final int value;
+  final int? sliceValue;
 
   CommercialOfferModel({
     required this.type,
@@ -15,11 +15,18 @@ class CommercialOfferModel extends CommercialOffer {
           sliceValue: sliceValue,
         );
 
-  factory CommercialOfferModel.fromJson(Map<String, dynamic> json) {
-    return CommercialOfferModel(
-      type: json['type'],
-      value: (json['value'] as num?)?.toDouble() ?? 0.0,
-      sliceValue: (json['sliceValue'] as num?)?.toDouble(),
+  CommercialOffer toDomain() {
+    return CommercialOffer(
+      type: type,
+      value: value,
+      sliceValue: sliceValue,
     );
   }
+
+  factory CommercialOfferModel.fromJson(Map<String, dynamic> json) =>
+      CommercialOfferModel(
+          type: OfferType.values
+              .firstWhere((ot) => ot.toString() == "OfferType.${json['type']}"),
+          value: json['value'],
+          sliceValue: json['sliceValue']);
 }

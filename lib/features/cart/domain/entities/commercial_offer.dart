@@ -1,11 +1,17 @@
 import 'package:equatable/equatable.dart';
 
-class CommercialOffer extends Equatable {
-  final String type;
-  final double value;
-  final double? sliceValue;
+enum OfferType {
+  percentage,
+  minus,
+  slice,
+}
 
-  CommercialOffer({
+class CommercialOffer extends Equatable {
+  final OfferType type;
+  final int value;
+  final int? sliceValue;
+
+  const CommercialOffer({
     required this.type,
     required this.value,
     this.sliceValue,
