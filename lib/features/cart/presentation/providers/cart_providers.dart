@@ -10,26 +10,28 @@ final cartProvider =
     StateNotifierProvider<CartNotifier, CartState>((ref) => CartNotifier());
 
 class CartNotifier extends StateNotifier<CartState> {
-  CartNotifier() : super(CartState(false, 0, 0, 0, cart: {}));
+  CartNotifier() : super(const CartState(false, 0, 0, 0, cart: {}));
 
   Future<void> addBookToCart(Book book) async {
-    state.cart[book] = (state.cart[book] ?? 0) + 1;
+    Map<Book, int> newCart = Map.from(state.cart);
+    newCart[book] = (state.cart[book] ?? 0) + 1;
     state = state.copyWith(
         isLoading: true,
-        totalPrice: GetCartTotalUsecase(state.cart)(),
-        cart: state.cart);
+        totalPrice: GetCartTotalUsecase(newCart)(),
+        cart: newCart);
 
     await updatePrice();
   }
 
   Future<void> removeBookFromCart(Book book) async {
-    state.cart[book] = (state.cart[book] ?? 1) - 1;
-    if (state.cart[book] == 0) {
-      state.cart.remove(book);
+    Map<Book, int> newCart = Map.from(state.cart);
+    newCart[book] = (state.cart[book] ?? 1) - 1;
+    if (newCart[book] == 0) {
+      newCart.remove(book);
     }
     state = state.copyWith(
         isLoading: true,
-        totalPrice: GetCartTotalUsecase(state.cart)(),
+        totalPrice: GetCartTotalUsecase(newCart)(),
         cart: state.cart);
 
     await updatePrice();

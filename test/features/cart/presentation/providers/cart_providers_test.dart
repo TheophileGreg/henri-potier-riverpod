@@ -53,7 +53,6 @@ void main() {
     container.listen<CartState>(
       cartProvider,
       (oldState, newState) {
-        print('The provider changed from $oldState to $newState');
         states.add(newState);
       },
     );
