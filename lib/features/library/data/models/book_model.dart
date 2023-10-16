@@ -7,7 +7,7 @@ class BookModel extends Book {
   final String cover;
   final List<String> synopsis;
 
-  BookModel({
+  const BookModel({
     required this.isbn,
     required this.title,
     required this.price,

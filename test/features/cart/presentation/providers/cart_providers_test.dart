@@ -16,7 +16,9 @@ import 'cart_providers_test.mocks.dart';
 void main() {
   late final GetCommercialOffersUseCase mockGetCommercialOffersUseCase;
   late ProviderContainer container;
-  setUp(() {
+  setUp(() async {
+    await GetIt.instance.reset();
+
     mockGetCommercialOffersUseCase = GetIt.instance
         .registerSingleton<GetCommercialOffersUseCase>(
             MockGetCommercialOffersUseCase());
@@ -30,20 +32,10 @@ void main() {
       cover: "cover1.jpg",
       synopsis: ["Synopsis 1 part 1", "Synopsis 1 part 2"]);
 
-  const book2 = Book(
-      isbn: "124",
-      title: "Test Book 2",
-      price: 12.0,
-      cover: "cover2.jpg",
-      synopsis: [
-        "Synopsis 2 part 1",
-        "Synopsis 2 part 2",
-        "Synopsis 2 part 3"
-      ]);
   test('Initial state of cart provider', () {
     expect(
       container.read(cartProvider.notifier).state,
-      equals(CartState(false, 0, 0, 0, cart: {})),
+      equals(CartState(false, 0, 0, 0, cart: const {})),
     );
   });
 
@@ -51,9 +43,10 @@ void main() {
       'should_update_cart_state_and_apply_best_commercial_offer_when_book_is_added',
       () async {
     when(mockGetCommercialOffersUseCase(isbns: '123')).thenAnswer((_) async => [
-          CommercialOffer(type: OfferType.percentage, value: 5),
-          CommercialOffer(type: OfferType.minus, value: 7),
-          CommercialOffer(type: OfferType.slice, value: 10, sliceValue: 100)
+          const CommercialOffer(type: OfferType.percentage, value: 5),
+          const CommercialOffer(type: OfferType.minus, value: 7),
+          const CommercialOffer(
+              type: OfferType.slice, value: 10, sliceValue: 100)
         ]);
 
     final states = [];
@@ -67,7 +60,6 @@ void main() {
 
     final provider = container.read(cartProvider.notifier);
     await provider.addBookToCart(book1);
-    //await provider.addBookToCart(book2);
 
     expect(
       states[0],
@@ -83,7 +75,7 @@ void main() {
 
     expect(
       states[1],
-      equals(CartState(false, 10.0, 7.0, 10.0, cart: {
+      equals(CartState(false, 10.0, 7.0, 3.0, cart: {
         const Book(
             isbn: "123",
             title: "Test Book 1",

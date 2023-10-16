@@ -14,7 +14,11 @@ class CartNotifier extends StateNotifier<CartState> {
 
   Future<void> addBookToCart(Book book) async {
     state.cart[book] = (state.cart[book] ?? 0) + 1;
-    state = state.copyWith(cart: state.cart);
+    state = state.copyWith(
+        isLoading: true,
+        totalPrice: GetCartTotalUsecase(state.cart)(),
+        cart: state.cart);
+
     await updatePrice();
   }
 
@@ -23,19 +27,22 @@ class CartNotifier extends StateNotifier<CartState> {
     if (state.cart[book] == 0) {
       state.cart.remove(book);
     }
-    state = state.copyWith(cart: state.cart);
+    state = state.copyWith(
+        isLoading: true,
+        totalPrice: GetCartTotalUsecase(state.cart)(),
+        cart: state.cart);
+
     await updatePrice();
   }
 
   Future<void> updatePrice() async {
-    state = state.copyWith(
-        isLoading: true, totalPrice: GetCartTotalUsecase(state.cart)());
-
     final commercialOffers = await storeLocator<GetCommercialOffersUseCase>()(
         isbns: state.cart.keys.map((e) => e.isbn).toList().join(", "));
+    final bestRebate =
+        GetBestRebateUsecase(state.totalPrice, commercialOffers)();
     state = state.copyWith(
-        rebate: GetBestRebateUsecase(state.totalPrice, commercialOffers)(),
-        finalPrice: state.totalPrice - state.rebate,
+        rebate: bestRebate,
+        finalPrice: state.totalPrice - bestRebate,
         isLoading: false);
   }
 }

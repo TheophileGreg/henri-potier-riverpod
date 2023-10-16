@@ -3,10 +3,10 @@ import 'package:henri_potier_riverpod/features/library/domain/entities/book.dart
 
 class CartState extends Equatable {
   Map<Book, int> cart;
-  final bool isLoading;
-  final double totalPrice;
-  final double rebate;
-  final double finalPrice;
+  bool isLoading;
+  double totalPrice;
+  double rebate;
+  double finalPrice;
 
   CartState(
     this.isLoading,
