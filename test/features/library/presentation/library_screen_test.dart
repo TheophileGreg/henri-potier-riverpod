@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
@@ -15,14 +13,16 @@ import 'package:mockito/mockito.dart';
 
 import 'library_screen_test.mocks.dart';
 
-@GenerateMocks([CartNotifier, GetBooksUseCase, HttpClient])
+@GenerateMocks([
+  CartNotifier,
+  GetBooksUseCase,
+])
 void main() {
   late CartNotifier mockCartNotifier;
   late GetBooksUseCase mockGetBooksUseCase;
 
   setUp(() {
     GetIt.instance.reset();
-
     mockCartNotifier = MockCartNotifier();
     mockGetBooksUseCase = MockGetBooksUseCase();
 

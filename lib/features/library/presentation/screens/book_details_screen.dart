@@ -15,13 +15,12 @@ class BookDetailsScreen extends ConsumerWidget {
     return Scaffold(
         appBar: AppBar(title: Text(book.title)),
         body: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             children: [
-              Image.network(
-                book.cover,
-                height: 250,
-                width: double.infinity,
-                fit: BoxFit.cover,
+              FadeInImage(
+                image: NetworkImage(book.cover),
+                placeholder: const AssetImage('assets/harry.jpg'),
               ),
               const SizedBox(height: 16.0),
               Text(

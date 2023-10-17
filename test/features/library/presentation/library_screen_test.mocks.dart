@@ -3,20 +3,19 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i6;
-import 'dart:io' as _i3;
+import 'dart:async' as _i5;
 
-import 'package:flutter_riverpod/flutter_riverpod.dart' as _i5;
+import 'package:flutter_riverpod/flutter_riverpod.dart' as _i4;
 import 'package:henri_potier_riverpod/features/cart/domain/entities/cart_state.dart'
     as _i2;
 import 'package:henri_potier_riverpod/features/cart/presentation/providers/cart_providers.dart'
-    as _i4;
+    as _i3;
 import 'package:henri_potier_riverpod/features/library/domain/entities/book.dart'
-    as _i7;
+    as _i6;
 import 'package:henri_potier_riverpod/features/library/domain/usecases/get_books_usecase.dart'
-    as _i9;
+    as _i8;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:state_notifier/state_notifier.dart' as _i8;
+import 'package:state_notifier/state_notifier.dart' as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -39,37 +38,16 @@ class _FakeCartState_0 extends _i1.SmartFake implements _i2.CartState {
         );
 }
 
-class _FakeDuration_1 extends _i1.SmartFake implements Duration {
-  _FakeDuration_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeHttpClientRequest_2 extends _i1.SmartFake
-    implements _i3.HttpClientRequest {
-  _FakeHttpClientRequest_2(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
 /// A class which mocks [CartNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockCartNotifier extends _i1.Mock implements _i4.CartNotifier {
+class MockCartNotifier extends _i1.Mock implements _i3.CartNotifier {
   MockCartNotifier() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  set onError(_i5.ErrorListener? _onError) => super.noSuchMethod(
+  set onError(_i4.ErrorListener? _onError) => super.noSuchMethod(
         Invocation.setter(
           #onError,
           _onError,
@@ -84,10 +62,10 @@ class MockCartNotifier extends _i1.Mock implements _i4.CartNotifier {
       ) as bool);
 
   @override
-  _i6.Stream<_i2.CartState> get stream => (super.noSuchMethod(
+  _i5.Stream<_i2.CartState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i6.Stream<_i2.CartState>.empty(),
-      ) as _i6.Stream<_i2.CartState>);
+        returnValue: _i5.Stream<_i2.CartState>.empty(),
+      ) as _i5.Stream<_i2.CartState>);
 
   @override
   _i2.CartState get state => (super.noSuchMethod(
@@ -123,34 +101,34 @@ class MockCartNotifier extends _i1.Mock implements _i4.CartNotifier {
       ) as bool);
 
   @override
-  _i6.Future<void> addBookToCart(_i7.Book? book) => (super.noSuchMethod(
+  _i5.Future<void> addBookToCart(_i6.Book? book) => (super.noSuchMethod(
         Invocation.method(
           #addBookToCart,
           [book],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
-  _i6.Future<void> removeBookFromCart(_i7.Book? book) => (super.noSuchMethod(
+  _i5.Future<void> removeBookFromCart(_i6.Book? book) => (super.noSuchMethod(
         Invocation.method(
           #removeBookFromCart,
           [book],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
-  _i6.Future<void> updatePrice() => (super.noSuchMethod(
+  _i5.Future<void> updatePrice() => (super.noSuchMethod(
         Invocation.method(
           #updatePrice,
           [],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
   bool updateShouldNotify(
@@ -169,8 +147,8 @@ class MockCartNotifier extends _i1.Mock implements _i4.CartNotifier {
       ) as bool);
 
   @override
-  _i5.RemoveListener addListener(
-    _i8.Listener<_i2.CartState>? listener, {
+  _i4.RemoveListener addListener(
+    _i7.Listener<_i2.CartState>? listener, {
     bool? fireImmediately = true,
   }) =>
       (super.noSuchMethod(
@@ -180,7 +158,7 @@ class MockCartNotifier extends _i1.Mock implements _i4.CartNotifier {
           {#fireImmediately: fireImmediately},
         ),
         returnValue: () {},
-      ) as _i5.RemoveListener);
+      ) as _i4.RemoveListener);
 
   @override
   void dispose() => super.noSuchMethod(
@@ -195,541 +173,17 @@ class MockCartNotifier extends _i1.Mock implements _i4.CartNotifier {
 /// A class which mocks [GetBooksUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetBooksUseCase extends _i1.Mock implements _i9.GetBooksUseCase {
+class MockGetBooksUseCase extends _i1.Mock implements _i8.GetBooksUseCase {
   MockGetBooksUseCase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<List<_i7.Book>> call() => (super.noSuchMethod(
+  _i5.Future<List<_i6.Book>> call() => (super.noSuchMethod(
         Invocation.method(
           #call,
           [],
         ),
-        returnValue: _i6.Future<List<_i7.Book>>.value(<_i7.Book>[]),
-      ) as _i6.Future<List<_i7.Book>>);
-}
-
-/// A class which mocks [HttpClient].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockHttpClient extends _i1.Mock implements _i3.HttpClient {
-  MockHttpClient() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  Duration get idleTimeout => (super.noSuchMethod(
-        Invocation.getter(#idleTimeout),
-        returnValue: _FakeDuration_1(
-          this,
-          Invocation.getter(#idleTimeout),
-        ),
-      ) as Duration);
-
-  @override
-  set idleTimeout(Duration? _idleTimeout) => super.noSuchMethod(
-        Invocation.setter(
-          #idleTimeout,
-          _idleTimeout,
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  set connectionTimeout(Duration? _connectionTimeout) => super.noSuchMethod(
-        Invocation.setter(
-          #connectionTimeout,
-          _connectionTimeout,
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  set maxConnectionsPerHost(int? _maxConnectionsPerHost) => super.noSuchMethod(
-        Invocation.setter(
-          #maxConnectionsPerHost,
-          _maxConnectionsPerHost,
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  bool get autoUncompress => (super.noSuchMethod(
-        Invocation.getter(#autoUncompress),
-        returnValue: false,
-      ) as bool);
-
-  @override
-  set autoUncompress(bool? _autoUncompress) => super.noSuchMethod(
-        Invocation.setter(
-          #autoUncompress,
-          _autoUncompress,
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  set userAgent(String? _userAgent) => super.noSuchMethod(
-        Invocation.setter(
-          #userAgent,
-          _userAgent,
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  set authenticate(
-          _i6.Future<bool> Function(
-            Uri,
-            String,
-            String?,
-          )? f) =>
-      super.noSuchMethod(
-        Invocation.setter(
-          #authenticate,
-          f,
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  set connectionFactory(
-          _i6.Future<_i3.ConnectionTask<_i3.Socket>> Function(
-            Uri,
-            String?,
-            int?,
-          )? f) =>
-      super.noSuchMethod(
-        Invocation.setter(
-          #connectionFactory,
-          f,
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  set findProxy(String Function(Uri)? f) => super.noSuchMethod(
-        Invocation.setter(
-          #findProxy,
-          f,
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  set authenticateProxy(
-          _i6.Future<bool> Function(
-            String,
-            int,
-            String,
-            String?,
-          )? f) =>
-      super.noSuchMethod(
-        Invocation.setter(
-          #authenticateProxy,
-          f,
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  set badCertificateCallback(
-          bool Function(
-            _i3.X509Certificate,
-            String,
-            int,
-          )? callback) =>
-      super.noSuchMethod(
-        Invocation.setter(
-          #badCertificateCallback,
-          callback,
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  set keyLog(dynamic Function(String)? callback) => super.noSuchMethod(
-        Invocation.setter(
-          #keyLog,
-          callback,
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  _i6.Future<_i3.HttpClientRequest> open(
-    String? method,
-    String? host,
-    int? port,
-    String? path,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #open,
-          [
-            method,
-            host,
-            port,
-            path,
-          ],
-        ),
-        returnValue:
-            _i6.Future<_i3.HttpClientRequest>.value(_FakeHttpClientRequest_2(
-          this,
-          Invocation.method(
-            #open,
-            [
-              method,
-              host,
-              port,
-              path,
-            ],
-          ),
-        )),
-      ) as _i6.Future<_i3.HttpClientRequest>);
-
-  @override
-  _i6.Future<_i3.HttpClientRequest> openUrl(
-    String? method,
-    Uri? url,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #openUrl,
-          [
-            method,
-            url,
-          ],
-        ),
-        returnValue:
-            _i6.Future<_i3.HttpClientRequest>.value(_FakeHttpClientRequest_2(
-          this,
-          Invocation.method(
-            #openUrl,
-            [
-              method,
-              url,
-            ],
-          ),
-        )),
-      ) as _i6.Future<_i3.HttpClientRequest>);
-
-  @override
-  _i6.Future<_i3.HttpClientRequest> get(
-    String? host,
-    int? port,
-    String? path,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #get,
-          [
-            host,
-            port,
-            path,
-          ],
-        ),
-        returnValue:
-            _i6.Future<_i3.HttpClientRequest>.value(_FakeHttpClientRequest_2(
-          this,
-          Invocation.method(
-            #get,
-            [
-              host,
-              port,
-              path,
-            ],
-          ),
-        )),
-      ) as _i6.Future<_i3.HttpClientRequest>);
-
-  @override
-  _i6.Future<_i3.HttpClientRequest> getUrl(Uri? url) => (super.noSuchMethod(
-        Invocation.method(
-          #getUrl,
-          [url],
-        ),
-        returnValue:
-            _i6.Future<_i3.HttpClientRequest>.value(_FakeHttpClientRequest_2(
-          this,
-          Invocation.method(
-            #getUrl,
-            [url],
-          ),
-        )),
-      ) as _i6.Future<_i3.HttpClientRequest>);
-
-  @override
-  _i6.Future<_i3.HttpClientRequest> post(
-    String? host,
-    int? port,
-    String? path,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #post,
-          [
-            host,
-            port,
-            path,
-          ],
-        ),
-        returnValue:
-            _i6.Future<_i3.HttpClientRequest>.value(_FakeHttpClientRequest_2(
-          this,
-          Invocation.method(
-            #post,
-            [
-              host,
-              port,
-              path,
-            ],
-          ),
-        )),
-      ) as _i6.Future<_i3.HttpClientRequest>);
-
-  @override
-  _i6.Future<_i3.HttpClientRequest> postUrl(Uri? url) => (super.noSuchMethod(
-        Invocation.method(
-          #postUrl,
-          [url],
-        ),
-        returnValue:
-            _i6.Future<_i3.HttpClientRequest>.value(_FakeHttpClientRequest_2(
-          this,
-          Invocation.method(
-            #postUrl,
-            [url],
-          ),
-        )),
-      ) as _i6.Future<_i3.HttpClientRequest>);
-
-  @override
-  _i6.Future<_i3.HttpClientRequest> put(
-    String? host,
-    int? port,
-    String? path,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #put,
-          [
-            host,
-            port,
-            path,
-          ],
-        ),
-        returnValue:
-            _i6.Future<_i3.HttpClientRequest>.value(_FakeHttpClientRequest_2(
-          this,
-          Invocation.method(
-            #put,
-            [
-              host,
-              port,
-              path,
-            ],
-          ),
-        )),
-      ) as _i6.Future<_i3.HttpClientRequest>);
-
-  @override
-  _i6.Future<_i3.HttpClientRequest> putUrl(Uri? url) => (super.noSuchMethod(
-        Invocation.method(
-          #putUrl,
-          [url],
-        ),
-        returnValue:
-            _i6.Future<_i3.HttpClientRequest>.value(_FakeHttpClientRequest_2(
-          this,
-          Invocation.method(
-            #putUrl,
-            [url],
-          ),
-        )),
-      ) as _i6.Future<_i3.HttpClientRequest>);
-
-  @override
-  _i6.Future<_i3.HttpClientRequest> delete(
-    String? host,
-    int? port,
-    String? path,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #delete,
-          [
-            host,
-            port,
-            path,
-          ],
-        ),
-        returnValue:
-            _i6.Future<_i3.HttpClientRequest>.value(_FakeHttpClientRequest_2(
-          this,
-          Invocation.method(
-            #delete,
-            [
-              host,
-              port,
-              path,
-            ],
-          ),
-        )),
-      ) as _i6.Future<_i3.HttpClientRequest>);
-
-  @override
-  _i6.Future<_i3.HttpClientRequest> deleteUrl(Uri? url) => (super.noSuchMethod(
-        Invocation.method(
-          #deleteUrl,
-          [url],
-        ),
-        returnValue:
-            _i6.Future<_i3.HttpClientRequest>.value(_FakeHttpClientRequest_2(
-          this,
-          Invocation.method(
-            #deleteUrl,
-            [url],
-          ),
-        )),
-      ) as _i6.Future<_i3.HttpClientRequest>);
-
-  @override
-  _i6.Future<_i3.HttpClientRequest> patch(
-    String? host,
-    int? port,
-    String? path,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #patch,
-          [
-            host,
-            port,
-            path,
-          ],
-        ),
-        returnValue:
-            _i6.Future<_i3.HttpClientRequest>.value(_FakeHttpClientRequest_2(
-          this,
-          Invocation.method(
-            #patch,
-            [
-              host,
-              port,
-              path,
-            ],
-          ),
-        )),
-      ) as _i6.Future<_i3.HttpClientRequest>);
-
-  @override
-  _i6.Future<_i3.HttpClientRequest> patchUrl(Uri? url) => (super.noSuchMethod(
-        Invocation.method(
-          #patchUrl,
-          [url],
-        ),
-        returnValue:
-            _i6.Future<_i3.HttpClientRequest>.value(_FakeHttpClientRequest_2(
-          this,
-          Invocation.method(
-            #patchUrl,
-            [url],
-          ),
-        )),
-      ) as _i6.Future<_i3.HttpClientRequest>);
-
-  @override
-  _i6.Future<_i3.HttpClientRequest> head(
-    String? host,
-    int? port,
-    String? path,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #head,
-          [
-            host,
-            port,
-            path,
-          ],
-        ),
-        returnValue:
-            _i6.Future<_i3.HttpClientRequest>.value(_FakeHttpClientRequest_2(
-          this,
-          Invocation.method(
-            #head,
-            [
-              host,
-              port,
-              path,
-            ],
-          ),
-        )),
-      ) as _i6.Future<_i3.HttpClientRequest>);
-
-  @override
-  _i6.Future<_i3.HttpClientRequest> headUrl(Uri? url) => (super.noSuchMethod(
-        Invocation.method(
-          #headUrl,
-          [url],
-        ),
-        returnValue:
-            _i6.Future<_i3.HttpClientRequest>.value(_FakeHttpClientRequest_2(
-          this,
-          Invocation.method(
-            #headUrl,
-            [url],
-          ),
-        )),
-      ) as _i6.Future<_i3.HttpClientRequest>);
-
-  @override
-  void addCredentials(
-    Uri? url,
-    String? realm,
-    _i3.HttpClientCredentials? credentials,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #addCredentials,
-          [
-            url,
-            realm,
-            credentials,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void addProxyCredentials(
-    String? host,
-    int? port,
-    String? realm,
-    _i3.HttpClientCredentials? credentials,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #addProxyCredentials,
-          [
-            host,
-            port,
-            realm,
-            credentials,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void close({bool? force = false}) => super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-          {#force: force},
-        ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i5.Future<List<_i6.Book>>.value(<_i6.Book>[]),
+      ) as _i5.Future<List<_i6.Book>>);
 }

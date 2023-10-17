@@ -17,7 +17,10 @@ class BookListItem extends ConsumerWidget {
       child: Column(
         children: [
           Expanded(
-            child: Image.network(book.cover, fit: BoxFit.cover),
+            child: FadeInImage(
+              image: NetworkImage(book.cover),
+              placeholder: const AssetImage('assets/harry.jpg'),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
