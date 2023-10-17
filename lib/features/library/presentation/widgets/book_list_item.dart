@@ -26,10 +26,13 @@ class BookListItem extends ConsumerWidget {
           ),
           Text("${book.price}€"),
           ElevatedButton(
+            key: Key('add_to_cart_button_${book.isbn}'),
             onPressed: () {
               ref.watch(cartProvider.notifier).addBookToCart(book);
             },
-            child: const Icon(Icons.add),
+            child: const Icon(
+              Icons.add,
+            ),
           )
         ],
       ),

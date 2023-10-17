@@ -13,7 +13,8 @@ void main() {
   late GetBooksUseCase usecase;
   late LibraryRepository mockLibraryRepository;
 
-  setUp(() {
+  setUp(() async {
+    await GetIt.instance.reset();
     mockLibraryRepository = GetIt.instance
         .registerSingleton<LibraryRepository>(MockLibraryRepository());
     usecase = GetBooksUseCase(mockLibraryRepository);

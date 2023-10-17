@@ -31,12 +31,11 @@ class LibraryScreen extends ConsumerWidget {
                 itemBuilder: (context, index) {
                   final book = books[index];
                   return GestureDetector(
-                    onTap: () {
-                      GoRouter.of(context)
-                          .pushNamed('bookDetails', extra: book);
-                    },
-                    child: BookListItem(book: book),
-                  );
+                      onTap: () {
+                        GoRouter.of(context)
+                            .pushNamed('bookDetails', extra: book);
+                      },
+                      child: BookListItem(book: book));
                 }),
             loading: () => loadingScreen(),
             error: (err, stack) =>
@@ -47,7 +46,9 @@ class LibraryScreen extends ConsumerWidget {
           GoRouter.of(context).pushNamed('cart');
         },
         tooltip: 'Voir le panier',
-        child: const Icon(Icons.shopping_cart),
+        child: const Icon(
+          Icons.shopping_cart,
+        ),
       ),
     );
   }

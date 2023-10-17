@@ -16,12 +16,7 @@ import 'cart_providers_test.mocks.dart';
 void main() {
   late final GetCommercialOffersUseCase mockGetCommercialOffersUseCase;
   late ProviderContainer container;
-  setUp(() async {
-    await GetIt.instance.reset();
-
-    mockGetCommercialOffersUseCase = GetIt.instance
-        .registerSingleton<GetCommercialOffersUseCase>(
-            MockGetCommercialOffersUseCase());
+  setUp(() {
     container = createContainer();
   });
 
@@ -42,6 +37,12 @@ void main() {
   test(
       'should_update_cart_state_and_apply_best_commercial_offer_when_book_is_added',
       () async {
+    await GetIt.instance.reset();
+
+    mockGetCommercialOffersUseCase = GetIt.instance
+        .registerSingleton<GetCommercialOffersUseCase>(
+            MockGetCommercialOffersUseCase());
+
     when(mockGetCommercialOffersUseCase(isbns: '123')).thenAnswer((_) async => [
           const CommercialOffer(type: OfferType.percentage, value: 5),
           const CommercialOffer(type: OfferType.minus, value: 7),

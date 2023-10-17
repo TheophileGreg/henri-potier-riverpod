@@ -32,7 +32,7 @@ class CartNotifier extends StateNotifier<CartState> {
     state = state.copyWith(
         isLoading: true,
         totalPrice: GetCartTotalUsecase(newCart)(),
-        cart: state.cart);
+        cart: newCart);
 
     await updatePrice();
   }
