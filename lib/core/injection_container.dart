@@ -33,7 +33,7 @@ Future<void> init() async {
 
   //! Features - Cart
 
-// Api
+  // Api
   storeLocator.registerLazySingleton<CommercialOfferApi>(
     () => CommercialOfferApi(storeLocator(), baseUrl: baseUrl),
   );

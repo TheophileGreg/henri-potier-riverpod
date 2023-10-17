@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:henri_potier_riverpod/features/cart/presentation/providers/cart_providers.dart';
 import 'package:henri_potier_riverpod/features/library/domain/entities/book.dart';
+import 'package:henri_potier_riverpod/features/library/presentation/widgets/network_image_testable.dart';
 
 class BookListItem extends ConsumerWidget {
   const BookListItem({
@@ -15,12 +16,12 @@ class BookListItem extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Card(
       child: Column(
+        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Expanded(
-            child: FadeInImage(
-              image: NetworkImage(book.cover),
-              placeholder: const AssetImage('assets/harry.jpg'),
-            ),
+          FadeInImage(
+            height: 200,
+            image: NetWorkImageTestable(url: book.cover).build(context),
+            placeholder: const AssetImage('assets/harry.jpg'),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
