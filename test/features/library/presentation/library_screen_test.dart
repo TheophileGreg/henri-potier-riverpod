@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:henri_potier_riverpod/features/cart/domain/entities/cart_state.dart';
@@ -10,6 +11,7 @@ import 'package:mockito/annotations.dart';
 import 'package:henri_potier_riverpod/features/cart/presentation/providers/cart_providers.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:nock/nock.dart';
 
 import 'library_screen_test.mocks.dart';
 
@@ -21,6 +23,8 @@ void main() {
   late CartNotifier mockCartNotifier;
   late GetBooksUseCase mockGetBooksUseCase;
 
+  setUpAll(() => {nock.init()});
+
   setUp(() {
     GetIt.instance.reset();
 
@@ -28,6 +32,8 @@ void main() {
     mockCartNotifier = MockCartNotifier();
 
     GetIt.instance.registerSingleton<CartNotifier>(mockCartNotifier);
+
+    nock.cleanAll();
   });
 
   const testBook = Book(
@@ -42,6 +48,12 @@ void main() {
     when(mockGetBooksUseCase.call()).thenAnswer((_) async => [testBook]);
     when(mockCartNotifier.state)
         .thenReturn(const CartState(false, 0, 0, 0, cart: {}));
+
+    final img = await rootBundle.load('assets/harry.jpg');
+
+    final imgBytes = Uint8List.fromList(img.buffer.asUint8List());
+
+    nock("https://example.com").get("/cover.jpg")..reply(200, imgBytes);
 
     await tester.pumpWidget(
       ProviderScope(
