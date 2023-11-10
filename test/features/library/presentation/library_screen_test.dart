@@ -45,6 +45,9 @@ void main() {
   );
 
   testWidgets('Add book button should call addBookToCart', (tester) async {
+    const double screenWidth = 400;
+    tester.view.physicalSize = Size(screenWidth, 600);
+    tester.view.devicePixelRatio = 1;
     when(mockGetBooksUseCase.call()).thenAnswer((_) async => [testBook]);
     when(mockCartNotifier.state)
         .thenReturn(const CartState(false, 0, 0, 0, cart: {}));
