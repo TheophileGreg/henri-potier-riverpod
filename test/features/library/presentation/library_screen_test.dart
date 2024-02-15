@@ -46,7 +46,7 @@ void main() {
 
   testWidgets('Add book button should call addBookToCart', (tester) async {
     const double screenWidth = 400;
-    tester.view.physicalSize = Size(screenWidth, 600);
+    tester.view.physicalSize = const Size(screenWidth, 600);
     tester.view.devicePixelRatio = 1;
     when(mockGetBooksUseCase.call()).thenAnswer((_) async => [testBook]);
     when(mockCartNotifier.state)
@@ -56,7 +56,7 @@ void main() {
 
     final imgBytes = Uint8List.fromList(img.buffer.asUint8List());
 
-    nock("https://example.com").get("/cover.jpg")..reply(200, imgBytes);
+    nock("https://example.com").get("/cover.jpg").reply(200, imgBytes);
 
     await tester.pumpWidget(
       ProviderScope(

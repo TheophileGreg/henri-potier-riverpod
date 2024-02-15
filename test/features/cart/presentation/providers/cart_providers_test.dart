@@ -30,7 +30,7 @@ void main() {
   test('Initial state of cart provider', () {
     expect(
       container.read(cartProvider.notifier).state,
-      equals(CartState(false, 0, 0, 0, cart: const {})),
+      equals(const CartState(false, 0, 0, 0, cart: {})),
     );
   });
 

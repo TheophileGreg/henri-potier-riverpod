@@ -25,30 +25,40 @@ class CartScreen extends ConsumerWidget {
                   itemBuilder: (context, index) {
                     final book = cart.cart.keys.elementAt(index);
 
-                    return ListTile(
-                      title: Text(book.title),
-                      subtitle:
-                          Text('Price: ${book.price} x ${cart.cart[book]}'),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.remove),
-                            onPressed: () {
-                              ref
-                                  .watch(cartProvider.notifier)
-                                  .removeBookFromCart(book);
-                            },
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.add),
-                            onPressed: () {
-                              ref
-                                  .watch(cartProvider.notifier)
-                                  .addBookToCart(book);
-                            },
-                          ),
-                        ],
+                    return MergeSemantics(
+                      child: ListTile(
+                        title: Text(book.title),
+                        subtitle:
+                            Text('Price: ${book.price} x ${cart.cart[book]}'),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Semantics(
+                              label: 'Remove one ${book.title} from cart',
+                              enabled: true,
+                              child: IconButton(
+                                icon: const Icon(Icons.remove),
+                                onPressed: () {
+                                  ref
+                                      .watch(cartProvider.notifier)
+                                      .removeBookFromCart(book);
+                                },
+                              ),
+                            ),
+                            Semantics(
+                              label: 'Add one ${book.title} from cart',
+                              enabled: true,
+                              child: IconButton(
+                                icon: const Icon(Icons.add),
+                                onPressed: () {
+                                  ref
+                                      .watch(cartProvider.notifier)
+                                      .addBookToCart(book);
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },
