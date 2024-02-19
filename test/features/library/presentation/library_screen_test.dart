@@ -45,12 +45,8 @@ void main() {
   );
 
   testWidgets('Add book button should call addBookToCart', (tester) async {
-    const double screenWidth = 400;
-    tester.view.physicalSize = Size(screenWidth, 600);
-    tester.view.devicePixelRatio = 1;
     when(mockGetBooksUseCase.call()).thenAnswer((_) async => [testBook]);
-    when(mockCartNotifier.state)
-        .thenReturn(const CartState(false, 0, 0, 0, cart: {}));
+    when(mockCartNotifier.state).thenReturn(const CartState(false, 0, 0, 0, cart: {}));
 
     final img = await rootBundle.load('assets/harry.jpg');
 
@@ -84,8 +80,7 @@ void main() {
     verify(mockCartNotifier.addBookToCart(testBook)).called(1);
   });
 
-  testWidgets('LibraryScreen meets androidTapTargetGuideline',
-      (WidgetTester tester) async {
+  testWidgets('LibraryScreen meets androidTapTargetGuideline', (WidgetTester tester) async {
     final SemanticsHandle handle = tester.ensureSemantics();
     await tester.pumpWidget(ProviderScope(
         overrides: [cartProvider.overrideWith((ref) => mockCartNotifier)],
@@ -95,14 +90,23 @@ void main() {
     handle.dispose();
   });
 
-  testWidgets('LibraryScreen meets iosTapTargetGuideline',
-      (WidgetTester tester) async {
+  testWidgets('LibraryScreen meets iosTapTargetGuideline', (WidgetTester tester) async {
     final SemanticsHandle handle = tester.ensureSemantics();
     await tester.pumpWidget(ProviderScope(
         overrides: [cartProvider.overrideWith((ref) => mockCartNotifier)],
         child: const MaterialApp(home: LibraryScreen())));
     await tester.pump(const Duration(seconds: 2));
     await expectLater(tester, meetsGuideline(iOSTapTargetGuideline));
+    handle.dispose();
+  });
+
+  testWidgets('LibraryScreen meets textContrastGuideline', (WidgetTester tester) async {
+    final SemanticsHandle handle = tester.ensureSemantics();
+    await tester.pumpWidget(ProviderScope(
+        overrides: [cartProvider.overrideWith((ref) => mockCartNotifier)],
+        child: const MaterialApp(home: LibraryScreen())));
+    await tester.pump(const Duration(seconds: 2));
+    await expectLater(tester, meetsGuideline(textContrastGuideline));
     handle.dispose();
   });
 }

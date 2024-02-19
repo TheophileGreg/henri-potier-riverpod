@@ -24,18 +24,28 @@ class BookListItem extends ConsumerWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(book.title,
-                style: const TextStyle(fontWeight: FontWeight.bold)),
+            child: Expanded(
+                child: Text(
+              book.title,
+              style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 2),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 3,
+            )),
           ),
-          Text("${book.price}€"),
+          Expanded(
+              child: Text(
+            "${book.price}€",
+          )),
           ElevatedButton(
             key: Key('add_to_cart_button_${book.isbn}'),
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+              iconColor: MaterialStateProperty.all<Color>(Colors.white),
+            ),
             onPressed: () {
               ref.watch(cartProvider.notifier).addBookToCart(book);
             },
-            child: const Icon(
-              Icons.add,
-            ),
+            child: const Icon(Icons.add),
           )
         ],
       ),

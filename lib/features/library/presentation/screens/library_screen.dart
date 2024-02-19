@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import
 
 import 'package:flutter/material.dart';
+import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:henri_potier_riverpod/commons/widgets/loading_screen.dart';
@@ -20,26 +21,28 @@ class LibraryScreen extends ConsumerWidget {
         title: const Text('Bibliothèque d\'Henri Potier'),
       ),
       body: ref.watch(libraryProvider).when(
-            data: (books) => GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.6,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                ),
-                itemCount: books.length,
-                itemBuilder: (context, index) {
-                  final book = books[index];
-                  return GestureDetector(
-                      onTap: () {
-                        GoRouter.of(context)
-                            .pushNamed('bookDetails', extra: book);
-                      },
-                      child: BookListItem(book: book));
-                }),
+            data: (books) {
+              return ListView(
+                children: [
+                  LayoutGrid(
+                    columnSizes: [1.fr, 1.fr],
+                    rowSizes: const [auto, auto, auto, auto],
+                    rowGap: 10,
+                    columnGap: 10,
+                    children: [
+                      for (var book in books)
+                        GestureDetector(
+                            onTap: () {
+                              GoRouter.of(context).pushNamed('bookDetails', extra: book);
+                            },
+                            child: BookListItem(book: book)),
+                    ],
+                  ),
+                ],
+              );
+            },
             loading: () => loadingScreen(),
-            error: (err, stack) =>
-                const Center(child: Text('Une erreur est survenue')),
+            error: (err, stack) => const Center(child: Text('Une erreur est survenue')),
           ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
