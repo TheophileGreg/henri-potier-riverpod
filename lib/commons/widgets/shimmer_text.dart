@@ -3,8 +3,8 @@ import 'package:shimmer/shimmer.dart';
 
 Widget shimmerPlaceholder(BuildContext context, String text) {
   return Shimmer.fromColors(
-    baseColor: Colors.grey[300]!,
-    highlightColor: Colors.grey[100]!,
+    baseColor: Colors.grey[500]!,
+    highlightColor: Colors.grey[500]!,
     child: Text(
       text,
       style: TextStyle(

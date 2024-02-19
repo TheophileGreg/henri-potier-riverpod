@@ -52,7 +52,7 @@ void main() {
 
     final imgBytes = Uint8List.fromList(img.buffer.asUint8List());
 
-    nock("https://example.com").get("/cover.jpg")..reply(200, imgBytes);
+    nock("https://example.com").get("/cover.jpg").reply(200, imgBytes);
 
     await tester.pumpWidget(
       ProviderScope(

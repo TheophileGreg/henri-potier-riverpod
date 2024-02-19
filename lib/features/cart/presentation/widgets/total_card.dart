@@ -23,7 +23,7 @@ class TotalCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Prix total: €${cart.totalPrice}',
+                  'Prix : €${cart.totalPrice}',
                   style: const TextStyle(fontSize: 16),
                 ),
               ],
@@ -40,12 +40,24 @@ class TotalCard extends StatelessWidget {
                           'Remise: ',
                           style: TextStyle(fontSize: 16),
                         ),
-                        cart.isLoading
-                            ? shimmerPlaceholder(
-                                context,
-                                'chargement...',
-                              )
-                            : Text('€${cart.rebate}')
+                        if (cart.isLoading)
+                          shimmerPlaceholder(
+                            context,
+                            'chargement...',
+                          )
+                        else ...[
+                          Text(
+                            '€${cart.rebate}',
+                            style: const TextStyle(fontWeight: FontWeight.w700),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 8.0),
+                            child: Icon(
+                              Icons.local_offer,
+                              color: Colors.green,
+                            ),
+                          ),
+                        ],
                       ],
                     ),
                   ],
@@ -57,7 +69,7 @@ class TotalCard extends StatelessWidget {
                     Row(
                       children: [
                         const Text(
-                          'Nouveau prix total: ',
+                          'À payer: ',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,

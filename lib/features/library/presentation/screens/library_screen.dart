@@ -16,35 +16,42 @@ class LibraryScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Bibliothèque d\'Henri Potier')),
-      body: ref.watch(libraryProvider).when(
-            data: (books) {
-              return SingleChildScrollView(
-                child: LayoutGrid(
-                  columnSizes: [1.fr, 1.fr],
-                  rowSizes: const [auto, auto, auto, auto, auto],
-                  rowGap: 0,
-                  columnGap: 0,
-                  children: [
-                    for (var book in books)
-                      GestureDetector(
-                          onTap: () => GoRouter.of(context).pushNamed('bookDetails', extra: book),
-                          child: BookListItem(book: book)),
-                  ],
-                ),
-              );
-            },
-            loading: () => loadingScreen(),
-            error: (err, stack) => const Center(child: Text('Une erreur est survenue')),
+    return SafeArea(
+      top: false,
+      bottom: true,
+      child: Scaffold(
+        appBar: AppBar(title: const Text('Bibliothèque d\'Henri Potier'), excludeHeaderSemantics: true),
+        body: ref.watch(libraryProvider).when(
+              data: (books) {
+                return SingleChildScrollView(
+                  child: LayoutGrid(
+                    columnSizes: [1.fr, 1.fr],
+                    rowSizes: const [auto, auto, auto, auto, auto],
+                    rowGap: 5,
+                    columnGap: 0,
+                    children: [
+                      for (var book in books)
+                        GestureDetector(
+                            onTap: () => GoRouter.of(context).pushNamed('bookDetails', extra: book),
+                            child: BookListItem(book: book)),
+                    ],
+                  ),
+                );
+              },
+              loading: () => loadingScreen(),
+              error: (err, stack) => const Center(child: Text('Une erreur est survenue')),
+            ),
+        floatingActionButton: FloatingActionButton(
+          elevation: 4,
+          backgroundColor: Colors.blue,
+          onPressed: () {
+            GoRouter.of(context).pushNamed('cart');
+          },
+          tooltip: 'Go to cart',
+          child: const Icon(
+            Icons.shopping_cart_checkout,
+            color: Colors.white,
           ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          GoRouter.of(context).pushNamed('cart');
-        },
-        tooltip: 'Go to cart',
-        child: const Icon(
-          Icons.shopping_cart,
         ),
       ),
     );
