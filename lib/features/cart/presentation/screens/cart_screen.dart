@@ -34,32 +34,29 @@ class CartScreen extends ConsumerWidget {
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Semantics(
-                              label: 'Remove one ${book.title} from cart',
-                              button: true,
-                              enabled: true,
-                              onTapHint: 'Remove one ${book.title} from cart',
-                              child: IconButton(
-                                icon: const Icon(Icons.remove),
-                                onPressed: () {
-                                  ref
-                                      .watch(cartProvider.notifier)
-                                      .removeBookFromCart(book);
-                                },
+                            IconButton(
+                              icon: Icon(
+                                Icons.remove,
+                                semanticLabel:
+                                    'Remove one ${book.title} from cart',
                               ),
+                              onPressed: () {
+                                ref
+                                    .watch(cartProvider.notifier)
+                                    .removeBookFromCart(book);
+                              },
                             ),
-                            Semantics(
-                              label: 'Add one ${book.title} from cart',
-                              enabled: true,
-                              button: true,
-                              child: IconButton(
-                                icon: const Icon(Icons.add),
-                                onPressed: () {
-                                  ref
-                                      .watch(cartProvider.notifier)
-                                      .addBookToCart(book);
-                                },
+                            IconButton(
+                              icon: Icon(
+                                Icons.add,
+                                semanticLabel:
+                                    'Add one ${book.title} from cart',
                               ),
+                              onPressed: () {
+                                ref
+                                    .watch(cartProvider.notifier)
+                                    .addBookToCart(book);
+                              },
                             ),
                           ],
                         ),

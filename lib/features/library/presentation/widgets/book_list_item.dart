@@ -16,6 +16,8 @@ class BookListItem extends ConsumerWidget {
     return Card(
       semanticContainer: true,
       child: Semantics(
+        label: "Voir plus de détails sur le livre",
+        button: true,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -30,16 +32,11 @@ class BookListItem extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(book.title,
-                  semanticsLabel: "Le titre du livre est ${book.title}",
                   style: const TextStyle(fontWeight: FontWeight.bold)),
             ),
-            Semantics(
-              label: "Le prix du livre ${book.title} est ${book.price} euros",
-              readOnly: true,
-              child: Text(
-                "${book.price}€",
-                // style: TextStyle(fontWeight: FontWeight.bold, fontSize: 3),
-              ),
+            Text(
+              "${book.price}€",
+              // style: TextStyle(fontWeight: FontWeight.bold, fontSize: 3),
             ),
             ElevatedButton(
               key: Key('add_to_cart_button_${book.isbn}'),
@@ -48,8 +45,7 @@ class BookListItem extends ConsumerWidget {
               },
               child: Icon(
                 Icons.add,
-                semanticLabel:
-                    "Button pour ajouter le livre ${book.title} dans le panier",
+                semanticLabel: "Ajouter le livre ${book.title} dans le panier",
               ),
             )
           ],

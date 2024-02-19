@@ -61,10 +61,10 @@ class BookDetailsScreen extends ConsumerWidget {
                   onPressed: () {
                     ref.watch(cartProvider.notifier).addBookToCart(book);
                   },
-                  child: Text(
+                  child: const Text(
                     'Ajouter au panier',
                     semanticsLabel:
-                        "Button pour ajouter le livre ${book.title} dans le panier",
+                        "Button pour ajouter le livre dans le panier",
                   ),
                 )
               ],
