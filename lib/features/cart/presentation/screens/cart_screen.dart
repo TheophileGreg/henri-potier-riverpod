@@ -25,7 +25,8 @@ class CartScreen extends ConsumerWidget {
                   itemBuilder: (context, index) {
                     final book = cart.cart.keys.elementAt(index);
 
-                    return MergeSemantics(
+                    return Semantics(
+                      label: "Elements dans le panier",
                       child: ListTile(
                         title: Text(book.title),
                         subtitle:
@@ -35,7 +36,9 @@ class CartScreen extends ConsumerWidget {
                           children: [
                             Semantics(
                               label: 'Remove one ${book.title} from cart',
+                              button: true,
                               enabled: true,
+                              onTapHint: 'Remove one ${book.title} from cart',
                               child: IconButton(
                                 icon: const Icon(Icons.remove),
                                 onPressed: () {
@@ -48,6 +51,7 @@ class CartScreen extends ConsumerWidget {
                             Semantics(
                               label: 'Add one ${book.title} from cart',
                               enabled: true,
+                              button: true,
                               child: IconButton(
                                 icon: const Icon(Icons.add),
                                 onPressed: () {

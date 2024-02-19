@@ -15,14 +15,15 @@ class BookListItem extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Card(
       semanticContainer: true,
-      child: MergeSemantics(
+      child: Semantics(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             FadeInImage(
-              height: 200,
-              imageSemanticLabel:
-                  "Cette image représente la couverture du livre ${book.title}",
+              height: 180,
+              excludeFromSemantics: true,
+              // imageSemanticLabel:
+              //     "Cette image représente la couverture du livre ${book.title}",
               image: NetworkImage(book.cover),
               placeholder: const AssetImage('assets/harry.jpg'),
             ),
@@ -32,10 +33,13 @@ class BookListItem extends ConsumerWidget {
                   semanticsLabel: "Le titre du livre est ${book.title}",
                   style: const TextStyle(fontWeight: FontWeight.bold)),
             ),
-            Text(
-              "${book.price}€",
-              semanticsLabel:
-                  "Le prix du livre ${book.title} est ${book.price} euros",
+            Semantics(
+              label: "Le prix du livre ${book.title} est ${book.price} euros",
+              readOnly: true,
+              child: Text(
+                "${book.price}€",
+                // style: TextStyle(fontWeight: FontWeight.bold, fontSize: 3),
+              ),
             ),
             ElevatedButton(
               key: Key('add_to_cart_button_${book.isbn}'),

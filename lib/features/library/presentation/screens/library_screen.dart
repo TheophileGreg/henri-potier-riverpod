@@ -17,41 +17,50 @@ class LibraryScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bibliothèque d\'Henri Potier'),
+        title: Semantics(
+            header: true, child: const Text('Bibliothèque d\'Henri Potier')),
       ),
-      body: ref.watch(libraryProvider).when(
-            data: (books) => MergeSemantics(
-              child: Semantics(
-                label: "Liste des livres",
-                enabled: true,
-                child: GridView.builder(
-                    addSemanticIndexes: true,
-                    semanticChildCount: books.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.6,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
+      body: Semantics(
+        label: "Liste de livre",
+        child: ref.watch(libraryProvider).when(
+              data: (books) => Semantics(
+                label: "Scrollview livres",
+                child: CustomScrollView(
+                  slivers: [
+                    SliverGrid(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.6,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                      ),
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          final book = books[index];
+                          return Semantics(
+                            button: true,
+                            label: "Description de ${book.title}",
+                            child: GestureDetector(
+                              onTap: () {
+                                GoRouter.of(context)
+                                    .pushNamed('bookDetails', extra: book);
+                              },
+                              child: BookListItem(book: book),
+                            ),
+                          );
+                        },
+                        childCount: books.length,
+                      ),
                     ),
-                    itemCount: books.length,
-                    itemBuilder: (context, index) {
-                      final book = books[index];
-                      return MergeSemantics(
-                        child: GestureDetector(
-                            onTap: () {
-                              GoRouter.of(context)
-                                  .pushNamed('bookDetails', extra: book);
-                            },
-                            child: BookListItem(book: book)),
-                      );
-                    }),
+                  ],
+                ),
               ),
+              loading: () => loadingScreen(),
+              error: (err, stack) =>
+                  const Center(child: Text('Une erreur est survenue')),
             ),
-            loading: () => loadingScreen(),
-            error: (err, stack) =>
-                const Center(child: Text('Une erreur est survenue')),
-          ),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           GoRouter.of(context).pushNamed('cart');
