@@ -38,7 +38,7 @@ class CartScreen extends ConsumerWidget {
                               icon: Icon(
                                 Icons.remove,
                                 semanticLabel:
-                                    'Remove one ${book.title} from cart',
+                                    'Enlever un livre ${book.title} du panier',
                               ),
                               onPressed: () {
                                 ref
@@ -50,7 +50,7 @@ class CartScreen extends ConsumerWidget {
                               icon: Icon(
                                 Icons.add,
                                 semanticLabel:
-                                    'Add one ${book.title} from cart',
+                                    'Ajouter un livre ${book.title} au panier',
                               ),
                               onPressed: () {
                                 ref
