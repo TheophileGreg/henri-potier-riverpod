@@ -45,7 +45,7 @@ class LibraryScreen extends ConsumerWidget {
         onPressed: () {
           GoRouter.of(context).pushNamed('cart');
         },
-        tooltip: 'Voir le panier',
+        //tooltip: 'Voir le panier',
         child: const Icon(
           Icons.shopping_cart,
         ),
