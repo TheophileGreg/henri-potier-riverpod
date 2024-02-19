@@ -27,25 +27,28 @@ class CartScreen extends ConsumerWidget {
 
                     return ListTile(
                       title: Text(book.title),
-                      subtitle:
-                          Text('Price: ${book.price} x ${cart.cart[book]}'),
+                      subtitle: Text(
+                        'Prix: €${book.price * (cart.cart[book]?.toInt() ?? 0)} \nUnités: ${cart.cart[book]}',
+                      ),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           IconButton(
-                            icon: const Icon(Icons.remove),
+                            icon: Semantics(
+                              label: 'Remove one unit of ${book.title} from cart',
+                              child: const Icon(Icons.remove),
+                            ),
                             onPressed: () {
-                              ref
-                                  .watch(cartProvider.notifier)
-                                  .removeBookFromCart(book);
+                              ref.watch(cartProvider.notifier).removeBookFromCart(book);
                             },
                           ),
                           IconButton(
-                            icon: const Icon(Icons.add),
+                            icon: Semantics(
+                              label: 'Add one unit of ${book.title} from cart',
+                              child: const Icon(Icons.add),
+                            ),
                             onPressed: () {
-                              ref
-                                  .watch(cartProvider.notifier)
-                                  .addBookToCart(book);
+                              ref.watch(cartProvider.notifier).addBookToCart(book);
                             },
                           ),
                         ],
@@ -59,8 +62,7 @@ class CartScreen extends ConsumerWidget {
           );
         },
         loading: () => loadingScreen(),
-        error: (error, stack) =>
-            const Center(child: Text('Erreur lors du chargement des livres.')),
+        error: (error, stack) => const Center(child: Text('Erreur lors du chargement des livres.')),
       ),
     );
   }

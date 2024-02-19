@@ -18,23 +18,19 @@ class BookListItem extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           FadeInImage(
+            excludeFromSemantics: true,
             height: 200,
             image: NetworkImage(book.cover),
             placeholder: const AssetImage('assets/harry.jpg'),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Expanded(
-                child: Text(
-              book.title,
-              style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 2),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 3,
-            )),
+            child: Text(book.title, overflow: TextOverflow.ellipsis, maxLines: 3),
           ),
           Expanded(
               child: Text(
             "${book.price}€",
+            semanticsLabel: '${book.price} euros',
           )),
           ElevatedButton(
             key: Key('add_to_cart_button_${book.isbn}'),
@@ -45,7 +41,14 @@ class BookListItem extends ConsumerWidget {
             onPressed: () {
               ref.watch(cartProvider.notifier).addBookToCart(book);
             },
-            child: const Icon(Icons.add),
+            child: Semantics(
+                label: 'Add ${book.title} to cart',
+                button: true,
+                enabled: true,
+                child: const Icon(
+                  Icons.add,
+                ) // Si on met le semantics entant que parent de IconButton le semantics ne fonctionne pas ,
+                ),
           )
         ],
       ),

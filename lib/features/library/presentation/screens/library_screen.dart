@@ -17,28 +17,22 @@ class LibraryScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Bibliothèque d\'Henri Potier'),
-      ),
+      appBar: AppBar(title: const Text('Bibliothèque d\'Henri Potier')),
       body: ref.watch(libraryProvider).when(
             data: (books) {
-              return ListView(
-                children: [
-                  LayoutGrid(
-                    columnSizes: [1.fr, 1.fr],
-                    rowSizes: const [auto, auto, auto, auto],
-                    rowGap: 10,
-                    columnGap: 10,
-                    children: [
-                      for (var book in books)
-                        GestureDetector(
-                            onTap: () {
-                              GoRouter.of(context).pushNamed('bookDetails', extra: book);
-                            },
-                            child: BookListItem(book: book)),
-                    ],
-                  ),
-                ],
+              return SingleChildScrollView(
+                child: LayoutGrid(
+                  columnSizes: [1.fr, 1.fr],
+                  rowSizes: const [auto, auto, auto, auto, auto],
+                  rowGap: 0,
+                  columnGap: 0,
+                  children: [
+                    for (var book in books)
+                      GestureDetector(
+                          onTap: () => GoRouter.of(context).pushNamed('bookDetails', extra: book),
+                          child: BookListItem(book: book)),
+                  ],
+                ),
               );
             },
             loading: () => loadingScreen(),
@@ -48,7 +42,7 @@ class LibraryScreen extends ConsumerWidget {
         onPressed: () {
           GoRouter.of(context).pushNamed('cart');
         },
-        tooltip: 'Voir le panier',
+        tooltip: 'Go to cart',
         child: const Icon(
           Icons.shopping_cart,
         ),

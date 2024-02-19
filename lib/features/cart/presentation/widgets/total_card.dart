@@ -23,7 +23,7 @@ class TotalCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Prix total: \$${cart.totalPrice}',
+                  'Prix total: €${cart.totalPrice}',
                   style: const TextStyle(fontSize: 16),
                 ),
               ],
@@ -45,7 +45,7 @@ class TotalCard extends StatelessWidget {
                                 context,
                                 'chargement...',
                               )
-                            : Text('\$${cart.rebate}')
+                            : Text('€${cart.rebate}')
                       ],
                     ),
                   ],
@@ -68,7 +68,7 @@ class TotalCard extends StatelessWidget {
                                 context,
                                 'chargement...',
                               )
-                            : Text('\$${cart.finalPrice}',
+                            : Text('€${cart.finalPrice}',
                                 style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
