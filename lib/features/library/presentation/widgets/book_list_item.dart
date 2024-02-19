@@ -22,10 +22,11 @@ class BookListItem extends ConsumerWidget {
             image: NetworkImage(book.cover),
             placeholder: const AssetImage('assets/harry.jpg'),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(book.title,
-                style: const TextStyle(fontWeight: FontWeight.bold)),
+          Text(
+            book.title,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
           Text("${book.price}€"),
           ElevatedButton(
