@@ -19,36 +19,32 @@ class BookDetailsScreen extends ConsumerWidget {
         appBar: AppBar(title: Semantics(header: true, child: Text(book.title))),
         body: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
-            children: [
-              MergeSemantics(
-                child: Column(
-                  children: [
-                    FadeInImage(
-                      image: NetworkImage(book.cover),
-                      placeholder: const AssetImage('assets/harry.jpg'),
-                    ),
-                    const SizedBox(height: 16.0),
-                    Text(
-                      book.title,
-                      style: const TextStyle(
-                          fontSize: 24.0, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 16.0),
-                    Text('ISBN: ${book.isbn}'),
-                    const SizedBox(height: 8.0),
-                    Text('Price: \$${book.price.toStringAsFixed(2)}'),
-                    const SizedBox(height: 16.0),
-                    ...book.synopsis.map(
-                      (line) => Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4.0),
-                        child: Text(line),
-                      ),
-                    ),
-                  ],
+          child: MergeSemantics(
+            child: Column(
+              children: [
+                FadeInImage(
+                  image: NetworkImage(book.cover),
+                  placeholder: const AssetImage('assets/harry.jpg'),
                 ),
-              ),
-            ],
+                const SizedBox(height: 16.0),
+                Text(
+                  book.title,
+                  style: const TextStyle(
+                      fontSize: 24.0, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16.0),
+                Text('ISBN: ${book.isbn}'),
+                const SizedBox(height: 8.0),
+                Text('Price: \$${book.price.toStringAsFixed(2)}'),
+                const SizedBox(height: 16.0),
+                ...book.synopsis.map(
+                  (line) => Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4.0),
+                    child: Text(line),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
