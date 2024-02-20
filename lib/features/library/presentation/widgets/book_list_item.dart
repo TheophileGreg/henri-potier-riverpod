@@ -13,18 +13,18 @@ class BookListItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Semantics(
-      label: "Détails du livre",
-      button: true,
-      enabled: true,
-      container: true,
-      child: Card(
-        elevation: 4,
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(12))),
-        color: Colors.grey.shade300,
-        child: Padding(
-          padding: const EdgeInsets.all(8),
+    return Card(
+      elevation: 4,
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(12))),
+      color: Colors.grey.shade300,
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Semantics(
+          label: "Détails du livre",
+          button: true,
+          enabled: true,
+          container: true,
           child: Column(
             children: [
               ClipRRect(
