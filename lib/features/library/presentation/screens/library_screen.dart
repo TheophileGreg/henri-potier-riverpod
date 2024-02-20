@@ -20,26 +20,34 @@ class LibraryScreen extends ConsumerWidget {
       top: false,
       bottom: true,
       child: Scaffold(
-        appBar: AppBar(title: const Text('Bibliothèque d\'Henri Potier'), excludeHeaderSemantics: true),
+        appBar: AppBar(
+          title: Semantics(
+              header: true, child: const Text('Bibliothèque d\'Henri Potier')),
+        ),
         body: ref.watch(libraryProvider).when(
               data: (books) {
-                return SingleChildScrollView(
-                  child: LayoutGrid(
-                    columnSizes: [1.fr, 1.fr],
-                    rowSizes: const [auto, auto, auto, auto, auto],
-                    rowGap: 5,
-                    columnGap: 0,
-                    children: [
-                      for (var book in books)
-                        GestureDetector(
-                            onTap: () => GoRouter.of(context).pushNamed('bookDetails', extra: book),
-                            child: BookListItem(book: book)),
-                    ],
+                return Semantics(
+                  label: 'Liste des livres',
+                  child: SingleChildScrollView(
+                    child: LayoutGrid(
+                      columnSizes: [1.fr, 1.fr],
+                      rowSizes: const [auto, auto, auto, auto, auto],
+                      rowGap: 5,
+                      columnGap: 0,
+                      children: [
+                        for (var book in books)
+                          GestureDetector(
+                              onTap: () => GoRouter.of(context)
+                                  .pushNamed('bookDetails', extra: book),
+                              child: BookListItem(book: book)),
+                      ],
+                    ),
                   ),
                 );
               },
               loading: () => loadingScreen(),
-              error: (err, stack) => const Center(child: Text('Une erreur est survenue')),
+              error: (err, stack) =>
+                  const Center(child: Text('Une erreur est survenue')),
             ),
         floatingActionButton: FloatingActionButton(
           elevation: 4,
@@ -47,7 +55,7 @@ class LibraryScreen extends ConsumerWidget {
           onPressed: () {
             GoRouter.of(context).pushNamed('cart');
           },
-          tooltip: 'Go to cart',
+          tooltip: 'Aller au panier',
           child: const Icon(
             Icons.shopping_cart_checkout,
             color: Colors.white,

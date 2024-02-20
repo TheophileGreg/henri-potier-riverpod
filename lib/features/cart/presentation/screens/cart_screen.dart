@@ -52,15 +52,21 @@ class CartScreen extends ConsumerWidget {
                           style: DefaultTextStyle.of(context).style,
                           children: [
                             TextSpan(
-                              text: '€${book.price * (cart.cart[book]?.toInt() ?? 0)}',
-                              style: const TextStyle(fontWeight: FontWeight.w700),
+                              text:
+                                  '€${book.price * (cart.cart[book]?.toInt() ?? 0)}',
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w700),
                               children: [
-                                TextSpan(text: '\nUnités: ', style: DefaultTextStyle.of(context).style, children: [
-                                  TextSpan(
-                                    text: '${cart.cart[book]}',
-                                    style: const TextStyle(fontWeight: FontWeight.w700),
-                                  ),
-                                ])
+                                TextSpan(
+                                    text: '\nUnités: ',
+                                    style: DefaultTextStyle.of(context).style,
+                                    children: [
+                                      TextSpan(
+                                        text: '${cart.cart[book]}',
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                    ])
                               ],
                             ),
                           ],
@@ -70,11 +76,15 @@ class CartScreen extends ConsumerWidget {
                           children: [
                             IconButton(
                               style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(Colors.black.withOpacity(0.5)),
-                                iconColor: MaterialStateProperty.all<Color>(Colors.white),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.black.withOpacity(0.5)),
+                                iconColor: MaterialStateProperty.all<Color>(
+                                    Colors.white),
                               ),
                               icon: Semantics(
-                                label: 'Remove one unit of ${book.title} from cart',
+                                label:
+                                    'Enlever un livre :  ${book.title} du panier',
                                 child: const Icon(Icons.remove),
                               ),
                               onPressed: () {
@@ -83,49 +93,69 @@ class CartScreen extends ConsumerWidget {
                                       context: context,
                                       builder: (context) => AlertDialog(
                                             backgroundColor: Colors.white,
-                                            title: const Text('Voulez-vous supprimer cette article du panier ?'),
+                                            title: const Text(
+                                                'Voulez-vous supprimer cette article du panier ?'),
                                             actions: [
                                               ElevatedButton(
                                                   onPressed: () {
                                                     Navigator.of(context).pop();
                                                   },
                                                   style: ButtonStyle(
-                                                    elevation: MaterialStateProperty.all<double?>(0.0),
+                                                    elevation:
+                                                        MaterialStateProperty
+                                                            .all<double?>(0.0),
                                                   ),
                                                   child: const Text(
                                                     'Non',
-                                                    style: TextStyle(color: Colors.black),
+                                                    style: TextStyle(
+                                                        color: Colors.black),
                                                   )),
                                               ElevatedButton(
                                                   onPressed: () {
-                                                    ref.watch(cartProvider.notifier).removeBookFromCart(book);
+                                                    ref
+                                                        .watch(cartProvider
+                                                            .notifier)
+                                                        .removeBookFromCart(
+                                                            book);
                                                     Navigator.of(context).pop();
                                                   },
                                                   style: ButtonStyle(
-                                                    elevation: MaterialStateProperty.all<double?>(0.0),
+                                                    elevation:
+                                                        MaterialStateProperty
+                                                            .all<double?>(0.0),
                                                   ),
                                                   child: Text(
                                                     'Oui',
-                                                    style: TextStyle(color: Colors.black.withOpacity(0.7)),
+                                                    style: TextStyle(
+                                                        color: Colors.black
+                                                            .withOpacity(0.7)),
                                                   )),
                                             ],
                                           ));
                                 } else {
-                                  ref.watch(cartProvider.notifier).removeBookFromCart(book);
+                                  ref
+                                      .watch(cartProvider.notifier)
+                                      .removeBookFromCart(book);
                                 }
                               },
                             ),
                             IconButton(
                               style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-                                iconColor: MaterialStateProperty.all<Color>(Colors.white),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.blue),
+                                iconColor: MaterialStateProperty.all<Color>(
+                                    Colors.white),
                               ),
                               icon: Semantics(
-                                label: 'Add one unit of ${book.title} to cart',
+                                label:
+                                    'Rajouter un  livre : ${book.title} du panier',
                                 child: const Icon(Icons.add),
                               ),
                               onPressed: () {
-                                ref.watch(cartProvider.notifier).addBookToCart(book);
+                                ref
+                                    .watch(cartProvider.notifier)
+                                    .addBookToCart(book);
                               },
                             ),
                           ],
@@ -151,7 +181,8 @@ class CartScreen extends ConsumerWidget {
           );
         },
         loading: () => loadingScreen(),
-        error: (error, stack) => const Center(child: Text('Erreur lors du chargement des livres.')),
+        error: (error, stack) =>
+            const Center(child: Text('Erreur lors du chargement des livres.')),
       ),
     );
   }
